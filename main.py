@@ -12,8 +12,8 @@ urllib3.disable_warnings()
 API_ID = 39719995
 API_HASH = '8f9b2cf0583c4e31193ce318a0ef0e7a'
 BOT_TOKEN = "8510274862:AAGkSIrvwONolWc_6gynRbQw1AUb_iMhUus"
-STRING_SESSION = os.getenv("STRING_SESSION")
-STORAGE_BOT = "@Smiya_Dyal_Bot_Khezna" # <-- Beddelha
+TARGET_BOT = os.getenv("TARGET_BOT")
+STORAGE_BOT = "@CheckerM3U_bot" # <-- Beddelha
 
 bot = telebot.TeleBot(BOT_TOKEN)
 client = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
