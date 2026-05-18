@@ -31,16 +31,27 @@ def run_web():
 @client.on(events.NewMessage())
 async def handler(event):
     if not event.text: return
-    # Jbed links dyal IPTV
-    links = re.findall(r'(https?://[^\s]+)', event.text)
-    iptv_links = [l for l in links if any(k in l.lower() for k in ["get.php", "username=", ".m3u"])]
     
-    if iptv_links:
-        for l in list(set(iptv_links)):
+    # Regex kiy-jbed l-link k-amel
+    urls = re.findall(r'(https?://[^\s]+)', event.text)
+    iptv = [u for u in urls if any(k in u.lower() for k in ["get.php", "username=", ".m3u"])]
+    
+    if iptv:
+        for l in list(set(iptv)):
             try:
-                # Sift l l-bot l-khezna li 7eti f Railway
-                await client.send_message(TARGET_BOT, f"🛰️ **New link found:**\n📍 Source: `{event.chat.title or 'Private'}`\n━━━━━━━━━━━━━━━\n🔗 `{l}`")
-                print(f"🎯 Forwarded to {TARGET_BOT}")
+                # L-9ALB HNA: Jbed s-smiya s-7a7 wach Group oula Private Chat
+                chat = await event.get_chat()
+                if hasattr(chat, 'title'):
+                    source_name = chat.title
+                elif hasattr(chat, 'first_name'):
+                    source_name = f"Private: {chat.first_name}"
+                else:
+                    source_name = "Unknown Source"
+                    
+                # Sift l l-bot l-khezna
+                msg_to_send = f"🛰️ **New IPTV Found**\n📍 Source: `{source_name}`\n━━━━━━━━━━━━━━━\n🔗 `{l}`"
+                await client.send_message(TARGET_BOT, msg_to_send)
+                print(f"🎯 Forwarded link to {TARGET_BOT}")
             except Exception as e:
                 print(f"❌ Error sending: {e}")
 
