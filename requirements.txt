@@ -1,4 +1,4 @@
 pyTelegramBotAPI
 curl_cffi
-flask
 telethon
+flask
