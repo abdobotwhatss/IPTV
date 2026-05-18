@@ -1,4 +1,3 @@
 pyTelegramBotAPI
 curl_cffi
-telethon
 flask
